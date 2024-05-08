@@ -1,5 +1,5 @@
-const { executeINSERTQuery } = require("../../src/queryExecutor");
-const { readCSV, writeCSV } = require("../../src/csvReader");
+const { executeINSERTQuery } = require('../../src/index');
+const { readCSV, writeCSV } = require('../../src/csvReader');
 const fs = require('fs');
 
 // Helper function to create grades.csv with initial data
@@ -13,8 +13,7 @@ async function createGradesCSV() {
 }
 
 // Test to INSERT a new grade and verify
-test(
-    "Execute INSERT INTO Query for grades.csv", async () => {
+test('Execute INSERT INTO Query for grades.csv', async () => {
     // Create grades.csv with initial data
     await createGradesCSV();
 
@@ -25,7 +24,6 @@ test(
     // Verify the new entry
     const updatedData = await readCSV('grades.csv');
     const newEntry = updatedData.find(row => row.student_id === '4' && row.course === 'Physics');
-    
     console.log(updatedData)
     expect(newEntry).toBeDefined();
     expect(newEntry.grade).toEqual('A');

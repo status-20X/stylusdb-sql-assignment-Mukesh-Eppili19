@@ -1,8 +1,7 @@
-const child_process = require("child_process");
-const path = require("path");
+const child_process = require('child_process');
+const path = require('path');
 
-test(
-    "DISTINCT with Multiple Columns via CLI", (done) => {
+test('DISTINCT with Multiple Columns via CLI', (done) => {
     const cliPath = path.join(__dirname, '..', 'src', 'cli.js');
     const cliProcess = child_process.spawn('node', [cliPath]);
 
@@ -13,12 +12,10 @@ test(
 
     cliProcess.on('exit', () => {
         // Define a regex pattern to extract the JSON result
-
         const cleanedOutput = outputData.replace(/\s+/g, ' ');
 
         const resultRegex = /Result: (\[.+\])/s;
         const match = cleanedOutput.match(resultRegex);
-        
         // Fix JSON outputput
         match[1] = match[1].replace(/'/g, '"').replace(/(\w+):/g, '"$1":');
 
@@ -42,6 +39,7 @@ test(
           done()
           throw new Error('Failed to parse CLI output');
         }
+
         done();
     });
 
